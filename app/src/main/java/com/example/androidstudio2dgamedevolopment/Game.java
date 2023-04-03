@@ -16,6 +16,7 @@ import java.util.Locale;
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
     private final Player player;
+    private final Enemy enemy;
     private final Joystick joystick;
     //private Context context; // replaced by getContext(); so no need extra variable to store it
     public Game(Context context) {
@@ -31,8 +32,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
          // initialize player  and game objects
         joystick = new Joystick(275,500,70,40);
 
-        player = new Player(getContext(),500,550,30);
-
+        player = new Player(getContext(),joystick,2*500,500,30);
+        enemy = new Enemy();
          setFocusable(true);
     }
 
@@ -119,7 +120,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void update() {
         // update game state
         joystick.update();
-        player.update(joystick);
+        player.update();
 
 
     }
